@@ -65,6 +65,7 @@ export interface KeyPersonnel {
   period?: string;
   background: string;
   afterPath?: string; // 离职后去向
+  description?: string;
 }
 
 export interface CompanyDetail {
@@ -636,7 +637,7 @@ export const hammerTechDetail: CompanyDetail = {
     { date: "2014.05", event: "Smartisan T1发布", impact: "首款手机，获iF设计金奖" },
     { date: "2014.07", event: "与王自如辩论", impact: "3小时直播辩论，引发广泛关注" },
     { date: "2016.10", event: "M1/M1L发布会", impact: "发布BigBang、OneStep等创新功能" },
-    { date: "2017.05", event: "坚果Pro发布", impact: "销量回暖，被称为"起死回生"之作" },
+    { date: "2017.05", event: "坚果Pro发布", impact: "销量回暖，被称为'起死回生'之作" },
     { date: "2018.05", event: "鸟巢TNT发布会", impact: "定价9999元的TNT工作站争议巨大" },
     { date: "2018.11", event: "成都公司裁员", impact: "资金链断裂，裁员约100人" },
     { date: "2019.01", event: "部分资产出售字节跳动", impact: "字节跳动收购锤子科技部分专利和团队" },
@@ -752,7 +753,7 @@ export const thinRedLineDetail: CompanyDetail = {
   name: "细红线科技（Thin Red Line）",
   period: "2022至今",
   status: "运营中",
-  description: "AR/AI创业公司，罗永浩自称"最后一次创业"。2022年获得约5000万美元天使轮融资，投后估值约2亿美元。2024年放弃AR眼镜转向AI，2025年1月发布J1 Assistant测试版。",
+  description: "AR/AI创业公司，罗永浩自称'最后一次创业'。2022年获得约5000万美元天使轮融资，投后估值约2亿美元。2024年放弃AR眼镜转向AI，2025年1月发布J1 Assistant测试版。",
   foundingDate: "2022年",
   registeredCapital: "未披露",
   businessScope: "AR/AI软硬件研发、大模型应用",
