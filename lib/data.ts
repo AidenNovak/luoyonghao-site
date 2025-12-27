@@ -2,6 +2,10 @@ export interface TimelineEvent {
   year: string;
   title: string;
   description: string;
+  source?: {
+    title: string;
+    url: string;
+  };
 }
 
 export interface Company {
@@ -9,11 +13,13 @@ export interface Company {
   period: string;
   description: string;
   status: string;
+  sources?: SourceLink[];
 }
 
 export interface Quote {
   text: string;
   source: string;
+  sourceUrl?: string;
 }
 
 export interface Product {
@@ -21,6 +27,10 @@ export interface Product {
   year: string;
   description: string;
   status: string;
+  source?: {
+    title: string;
+    url: string;
+  };
 }
 
 export interface Keynote {
@@ -30,6 +40,61 @@ export interface Keynote {
   products: string[];
   highlights: string;
   videoUrl?: string;
+  sourceUrl?: string;
+}
+
+export interface SourceLink {
+  title: string;
+  url: string;
+  platform: string; // "新闻" | "视频" | "百科" | "社交媒体"
+}
+
+export interface FinancingRound {
+  round: string;
+  date: string;
+  amount: string;
+  valuation?: string;
+  investors: string[];
+  leadInvestor?: string;
+  description?: string;
+}
+
+export interface KeyPersonnel {
+  name: string;
+  position: string;
+  period?: string;
+  background: string;
+  afterPath?: string; // 离职后去向
+}
+
+export interface CompanyDetail {
+  name: string;
+  period: string;
+  status: string;
+  description: string;
+  foundingDate: string;
+  registeredCapital?: string;
+  businessScope?: string;
+  keyPersonnel: KeyPersonnel[];
+  financingHistory: FinancingRound[];
+  equityStructure?: {
+    shareholder: string;
+    percentage?: string;
+    description?: string;
+  }[];
+  majorEvents: {
+    date: string;
+    event: string;
+    impact?: string;
+  }[];
+  financialData?: {
+    year: string;
+    revenue?: string;
+    profit?: string;
+    gmv?: string;
+    [key: string]: string | undefined;
+  }[];
+  sources: SourceLink[];
 }
 
 export interface PodcastEpisode {
@@ -80,22 +145,22 @@ export const profile = {
 };
 
 export const timeline: TimelineEvent[] = [
-  { year: "1972", title: "出生", description: "7月9日出生于吉林省延边朝鲜族自治州和龙县" },
-  { year: "1989", title: "高二辍学", description: "高中辍学，之后从事过多种职业" },
-  { year: "2001", title: "加入新东方", description: "自学一年英语后成为新东方教师，教学风格独特" },
-  { year: "2006", title: "创办牛博网", description: "创立博客网站牛博网，聚集了大量知名博主" },
-  { year: "2008", title: "创办老罗英语培训", description: "离开新东方，创办自己的英语培训机构" },
-  { year: "2012", title: "创立锤子科技", description: "5月28日宣布创立锤子科技，获7000万A轮融资" },
-  { year: "2014", title: "发布Smartisan T1", description: "首款手机产品发布，获得iF设计奖" },
-  { year: "2018", title: "危机与债务", description: "锤子科技资金链断裂，欠下约6亿元债务" },
-  { year: "2018", title: "出售给字节跳动", description: "将坚果手机团队和专利以1.8亿元出售给字节跳动" },
-  { year: "2020", title: "进军直播带货", description: "4月1日抖音首播，支付GMV超1亿元" },
-  { year: "2022", title: "创立细红线科技", description: "11月宣布AR创业项目，获5000万美元天使轮" },
-  { year: "2024", title: "从AR转向AI", description: "细红线放弃AR眼镜，转向AI智能硬件和大模型研发" },
-  { year: "2025.01", title: "J1 Assistant发布", description: "在海外发布AI助理软件J1 Assistant测试版（仅Android）" },
-  { year: "2025.04", title: "硬件团队裁撤", description: "完成AI智能硬件研发后裁撤全部硬件团队，保留约20名软件工程师" },
-  { year: "2025.04", title: "重启招聘", description: "细红线重启招聘，招募AI产品经理、大模型算法工程师等" },
-  { year: "2025.12", title: "科技春晚回归", description: "宣布12月30日举办年度科技创新分享大会，将发布细红线AI软件" },
+  { year: "1972", title: "出生", description: "7月9日出生于吉林省延边朝鲜族自治州和龙县", source: { title: "维基百科", url: "https://zh.wikipedia.org/zh-cn/%E7%BD%97%E6%B0%B8%E6%B5%A9" } },
+  { year: "1989", title: "高二辍学", description: "高中辍学，之后从事过多种职业", source: { title: "创业邦", url: "https://m.cyzone.cn/article/681139.html" } },
+  { year: "2001", title: "加入新东方", description: "自学一年英语后成为新东方教师，教学风格独特", source: { title: "维基百科", url: "https://zh.wikipedia.org/zh-cn/%E7%BD%97%E6%B0%B8%E6%B5%A9" } },
+  { year: "2006", title: "创办牛博网", description: "创立博客网站牛博网，聚集了大量知名博主", source: { title: "百度百科", url: "https://baike.baidu.com/item/%E7%BD%97%E6%B0%B8%E6%B5%A9/26814" } },
+  { year: "2008", title: "创办老罗英语培训", description: "离开新东方，创办自己的英语培训机构", source: { title: "百度百科", url: "https://baike.baidu.com/item/%E7%BD%97%E6%B0%B8%E6%B5%A9/26814" } },
+  { year: "2012", title: "创立锤子科技", description: "5月28日宣布创立锤子科技，获7000万A轮融资", source: { title: "证券时报", url: "https://www.stcn.com/article/detail/1314477.html" } },
+  { year: "2014", title: "发布Smartisan T1", description: "首款手机产品发布，获得iF设计奖", source: { title: "百度百科", url: "https://baike.baidu.com/item/%E9%94%A4%E5%AD%90%E7%A7%91%E6%8A%80" } },
+  { year: "2018", title: "危机与债务", description: "锤子科技资金链断裂，欠下约6亿元债务", source: { title: "新浪财经", url: "https://finance.sina.com.cn/tech/roll/2024-08-27/doc-incmachm4118419.shtml" } },
+  { year: "2018", title: "出售给字节跳动", description: "将坚果手机团队和专利以1.8亿元出售给字节跳动", source: { title: "新浪财经", url: "https://finance.sina.com.cn/tech/roll/2024-08-27/doc-incmachm4118419.shtml" } },
+  { year: "2020", title: "进军直播带货", description: "4月1日抖音首播，支付GMV超1亿元", source: { title: "人民网", url: "http://paper.people.com.cn/zgjjzk/html/2020-11/15/content_2019865.htm" } },
+  { year: "2022", title: "创立细红线科技", description: "11月宣布AR创业项目，获5000万美元天使轮", source: { title: "第一财经", url: "https://www.yicai.com/news/101643522.html" } },
+  { year: "2024", title: "从AR转向AI", description: "细红线放弃AR眼镜，转向AI智能硬件和大模型研发", source: { title: "新浪财经", url: "https://finance.sina.com.cn/tech/shenji/2025-04-21/doc-inetwvha5331302.shtml" } },
+  { year: "2025.01", title: "J1 Assistant发布", description: "在海外发布AI助理软件J1 Assistant测试版（仅Android）", source: { title: "DoNews", url: "https://www.donews.com/news/detail/1/4654574.html" } },
+  { year: "2025.04", title: "硬件团队裁撤", description: "完成AI智能硬件研发后裁撤全部硬件团队，保留约20名软件工程师", source: { title: "新浪财经", url: "https://finance.sina.com.cn/tech/shenji/2025-04-21/doc-inetwvha5331302.shtml" } },
+  { year: "2025.04", title: "重启招聘", description: "细红线重启招聘，招募AI产品经理、大模型算法工程师等", source: { title: "新浪财经", url: "https://finance.sina.com.cn/tech/shenji/2025-04-21/doc-inetwvha5331302.shtml" } },
+  { year: "2025.12", title: "科技春晚回归", description: "宣布12月30日举办年度科技创新分享大会，将发布细红线AI软件", source: { title: "新浪科技", url: "https://finance.sina.com.cn/tech/roll/2025-12-01/doc-infzhpkm2164945.shtml" } },
 ];
 
 export const companies: Company[] = [
@@ -103,31 +168,52 @@ export const companies: Company[] = [
     name: "牛博网",
     period: "2006-2009",
     description: "博客网站平台，聚集了韩寒、梁文道等知名博主，后因服务器问题关闭",
-    status: "已关闭"
+    status: "已关闭",
+    sources: [
+      { title: "维基百科", url: "https://zh.wikipedia.org/zh-cn/%E7%BD%97%E6%B0%B8%E6%B5%A9", platform: "百科" },
+      { title: "百度百科", url: "https://baike.baidu.com/item/%E7%BD%97%E6%B0%B8%E6%B5%A9/26814", platform: "百科" }
+    ]
   },
   {
     name: "老罗英语培训",
     period: "2008-2014",
     description: "英语培训机构，以独特教学风格和营销方式著称",
-    status: "已关闭"
+    status: "已关闭",
+    sources: [
+      { title: "百度百科", url: "https://baike.baidu.com/item/%E7%BD%97%E6%B0%B8%E6%B5%A9/26814", platform: "百科" }
+    ]
   },
   {
     name: "锤子科技",
     period: "2012-2019",
     description: "智能手机公司，发布Smartisan T1/T2、坚果系列手机、TNT工作站等产品。2018年资金链断裂，2019年团队被字节跳动收购",
-    status: "已出售"
+    status: "已出售",
+    sources: [
+      { title: "证券时报", url: "https://www.stcn.com/article/detail/1314477.html", platform: "新闻" },
+      { title: "百度百科", url: "https://baike.baidu.com/item/%E9%94%A4%E5%AD%90%E7%A7%91%E6%8A%80", platform: "百科" },
+      { title: "界面新闻", url: "https://www.jiemian.com/article/3762380.html", platform: "新闻" }
+    ]
   },
   {
     name: "交个朋友",
     period: "2020至今",
     description: "直播电商公司，2020年4月1日罗永浩抖音首播GMV超1亿。2023年通过世纪睿科借壳港股上市（股票代码：01450），更名为交个朋友控股",
-    status: "上市"
+    status: "上市",
+    sources: [
+      { title: "人民网", url: "http://paper.people.com.cn/zgjjzk/html/2020-11/15/content_2019865.htm", platform: "新闻" },
+      { title: "新浪财经", url: "https://finance.sina.com.cn/tech/roll/2024-08-27/doc-incmachm4118419.shtml", platform: "新闻" }
+    ]
   },
   {
     name: "细红线科技（Thin Red Line）",
     period: "2022至今",
     description: "AR/AI创业公司，自称'最后一次创业'。2022年获得约5000万美元天使轮融资，投后估值约2亿美元。2024年放弃AR眼镜研发转向AI，2025年1月发布J1 Assistant测试版，4月裁撤硬件团队保留20名软件工程师",
-    status: "运营中"
+    status: "运营中",
+    sources: [
+      { title: "第一财经", url: "https://www.yicai.com/news/101643522.html", platform: "新闻" },
+      { title: "新浪财经", url: "https://finance.sina.com.cn/tech/shenji/2025-04-21/doc-inetwvha5331302.shtml", platform: "新闻" },
+      { title: "DoNews", url: "https://www.donews.com/news/detail/1/4654574.html", platform: "新闻" }
+    ]
   },
 ];
 
@@ -177,6 +263,12 @@ export const debtInfo = {
     { date: "2024.08", event: "披露债务总额13亿，已还8.24亿，剩余5亿多" },
     { date: "2024.09", event: "在脱口秀节目提及还债进展" },
   ],
+  sourceLinks: [
+    { title: "新浪财经", url: "https://finance.sina.com.cn/tech/roll/2024-08-27/doc-incmachm4118419.shtml", platform: "新闻" },
+    { title: "澎湃新闻", url: "https://m.thepaper.cn/newsDetail_forward_28529240", platform: "新闻" },
+    { title: "36氪", url: "https://m.36kr.com/p/3140769299356160", platform: "新闻" },
+    { title: "上海日报", url: "https://www.jfdaily.com/news/detail?id=987132", platform: "新闻" }
+  ]
 };
 
 export const books = [
@@ -302,6 +394,11 @@ export const podcast = {
     { name: "小宇宙", url: "https://www.xiaoyuzhoufm.com/podcast/68981df29e7bcd326eb91d88", icon: "小宇宙" },
     { name: "喜马拉雅", url: "https://www.ximalaya.com/", icon: "喜马拉雅" },
   ],
+  sources: [
+    { title: "新浪科技", url: "https://finance.sina.com.cn/tech/roll/2025-08-12/doc-infksqyi9000795.shtml", platform: "新闻" },
+    { title: "36氪", url: "https://m.36kr.com/p/3433170489642369", platform: "新闻" },
+    { title: "界面新闻", url: "https://m.jiemian.com/article/13165523.html", platform: "新闻" }
+  ],
   episodes: [
     {
       episode: "Vol.01",
@@ -371,11 +468,23 @@ export const techConference2025 = {
     "线下发布+线上直播形式",
     "门票收入全部用于公益"
   ],
-  significance: "被视为罗永浩时隔七年后的''科技春晚''回归，上一次如此规模的发布会是2018年的鸟巢TNT发布会"
+  significance: "被视为罗永浩时隔七年后的''科技春晚''回归，上一次如此规模的发布会是2018年的鸟巢TNT发布会",
+  sources: [
+    { title: "新浪科技", url: "https://finance.sina.com.cn/tech/roll/2025-12-01/doc-infzhpkm2164945.shtml", platform: "新闻" },
+    { title: "IT之家", url: "https://www.ithome.com/0/906/302.htm", platform: "新闻" },
+    { title: "雷锋网", url: "https://www.leikeji.com/article/73558", platform: "新闻" },
+    { title: "澎湃新闻", url: "https://m.thepaper.cn/newsDetail_forward_32101581", platform: "新闻" }
+  ]
 };
 
 // 细红线科技2025年动态
 export const thinRedLine2025 = {
+  sources: [
+    { title: "新浪财经", url: "https://finance.sina.com.cn/tech/shenji/2025-04-21/doc-inetwvha5331302.shtml", platform: "新闻" },
+    { title: "21世纪经济报道", url: "https://www.21jingji.com/article/20250311/herald/353bf8c22af73815bcbb612d685191c8.html", platform: "新闻" },
+    { title: "DoNews", url: "https://www.donews.com/news/detail/1/4654574.html", platform: "新闻" },
+    { title: "猎云网", url: "https://www.iyiou.com/analysis/202412241086398", platform: "新闻" }
+  ],
   timeline: [
     {
       date: "2024年",
@@ -427,3 +536,286 @@ export const thinRedLine2025 = {
     description: "AI原生硬件设备，官网已预告但尚未发布"
   }
 };
+
+// ===== 公司详细报告 =====
+
+// 锤子科技详细报告
+export const hammerTechDetail: CompanyDetail = {
+  name: "锤子科技（Smartisan Technology）",
+  period: "2012-2019",
+  status: "已出售给字节跳动",
+  description: "智能手机公司，以设计驱动产品理念著称。发布Smartisan T1/T2、坚果系列手机、TNT工作站等产品。2018年资金链断裂，2019年将坚果手机团队和专利以1.8亿元出售给字节跳动。",
+  foundingDate: "2012年5月28日",
+  registeredCapital: "约3100万元人民币",
+  businessScope: "智能手机、操作系统、智能硬件研发",
+  keyPersonnel: [
+    {
+      name: "罗永浩",
+      position: "创始人、董事长、CEO",
+      period: "2012-2019",
+      background: "前新东方英语教师，牛博网、老罗英语培训创始人",
+      afterPath: "创立细红线科技"
+    },
+    {
+      name: "吴德周",
+      position: "CTO、硬件研发副总裁",
+      period: "2016-2019",
+      background: "前华为荣耀产品线总经理，2015年加入锤子科技",
+      afterPath: "加入字节跳动，任新石实验室总裁"
+    },
+    {
+      name: "钱晨",
+      position: "CTO",
+      period: "2013-2015",
+      background: "前摩托罗拉资深工程师",
+      afterPath: "离开锤子科技"
+    },
+    {
+      name: "朱海舟",
+      position: "产品总监",
+      period: "2016-2019",
+      background: "前科技媒体人，负责Smartisan OS产品",
+      afterPath: "加入字节跳动"
+    },
+    {
+      name: "肖鹏",
+      position: "软件研发副总裁",
+      period: "2014-2019",
+      background: "前台湾仁宝科技软件高管",
+      afterPath: "加入字节跳动"
+    }
+  ],
+  financingHistory: [
+    {
+      round: "天使轮",
+      date: "2012年",
+      amount: "未披露",
+      valuation: "未披露",
+      investors: ["个人投资者"],
+      description: "罗永浩自筹资金启动"
+    },
+    {
+      round: "A轮",
+      date: "2013年12月",
+      amount: "7000万元人民币",
+      valuation: "约4.7亿元人民币",
+      investors: ["紫辉创投(4000万)", "陌陌科技"],
+      leadInvestor: "紫辉创投",
+      description: "唐岩介绍郑刚投资，紫辉创投领投4000万"
+    },
+    {
+      round: "B轮",
+      date: "2014年4月",
+      amount: "1.8亿元人民币",
+      valuation: "约10亿元人民币",
+      investors: ["紫辉创投", "其他机构"],
+      leadInvestor: "紫辉创投",
+      description: "紫辉创投继续跟投，累计投资达1亿元"
+    },
+    {
+      round: "C轮",
+      date: "2015年6月",
+      amount: "未披露",
+      valuation: "约26.5亿元人民币",
+      investors: ["未披露"],
+      description: "估值达到高峰"
+    },
+    {
+      round: "D轮",
+      date: "2017年",
+      amount: "约6亿元人民币",
+      valuation: "未披露",
+      investors: ["成都市政府(3亿股权+3亿债权)", "私募基金(3-4亿)"],
+      leadInvestor: "成都市政府",
+      description: "成都政府战略投资，公司迁至成都"
+    }
+  ],
+  majorEvents: [
+    { date: "2012.05", event: "锤子科技成立", impact: "罗永浩宣布进入智能手机行业" },
+    { date: "2013.03", event: "Smartisan OS发布会", impact: "首次展示基于Android的深度定制系统" },
+    { date: "2014.05", event: "Smartisan T1发布", impact: "首款手机，获iF设计金奖" },
+    { date: "2014.07", event: "与王自如辩论", impact: "3小时直播辩论，引发广泛关注" },
+    { date: "2016.10", event: "M1/M1L发布会", impact: "发布BigBang、OneStep等创新功能" },
+    { date: "2017.05", event: "坚果Pro发布", impact: "销量回暖，被称为"起死回生"之作" },
+    { date: "2018.05", event: "鸟巢TNT发布会", impact: "定价9999元的TNT工作站争议巨大" },
+    { date: "2018.11", event: "成都公司裁员", impact: "资金链断裂，裁员约100人" },
+    { date: "2019.01", event: "部分资产出售字节跳动", impact: "字节跳动收购锤子科技部分专利和团队" },
+    { date: "2019", event: "罗永浩离开", impact: "罗永浩专注还债和新创业" }
+  ],
+  financialData: [
+    { year: "2012", revenue: "0", profit: "亏损", description: "初创期" },
+    { year: "2013", revenue: "未披露", profit: "亏损", description: "产品研发期" },
+    { year: "2014", revenue: "约10万部", profit: "亏损", description: "T1销量不佳" },
+    { year: "2015", revenue: "未披露", profit: "亏损", description: "T2销量平平" },
+    { year: "2016", revenue: "未披露", profit: "亏损", description: "M1系列" },
+    { year: "2017", revenue: "未披露", profit: "减亏", description: "坚果Pro系列销量回暖" },
+    { year: "2018", revenue: "大幅下降", profit: "资金链断裂", description: "危机爆发" }
+  ],
+  sources: [
+    { title: "证券时报", url: "https://www.stcn.com/article/detail/1314477.html", platform: "新闻" },
+    { title: "界面新闻", url: "https://www.jiemian.com/article/3762380.html", platform: "新闻" },
+    { title: "人民网", url: "http://capital.people.com.cn/n1/2017/0811/c405954-29464098.html", platform: "新闻" },
+    { title: "南方都市报", url: "https://m.mp.oeeee.com/a/BAAFRD000020230109755717.html", platform: "新闻" },
+    { title: "创业邦", url: "https://m.cyzone.cn/article/711579", platform: "新闻" }
+  ]
+};
+
+// 交个朋友详细报告
+export const jiaogePengyouDetail: CompanyDetail = {
+  name: "交个朋友控股（Be Friends Holding，股票代码：01450.HK）",
+  period: "2020至今",
+  status: "港股上市",
+  description: "直播电商公司，2020年4月1日罗永浩抖音首播GMV超1亿。2023年通过世纪睿科借壳港股上市。目前已成为跨平台直播电商龙头。",
+  foundingDate: "2020年4月",
+  registeredCapital: "港币上市公司",
+  businessScope: "直播电商、MCN服务、品牌营销",
+  keyPersonnel: [
+    {
+      name: "罗永浩",
+      position: "联合创始人、前主播",
+      period: "2020-2022",
+      background: "锤子科技创始人",
+      afterPath: "创立细红线科技，逐步退出直播"
+    },
+    {
+      name: "李钧",
+      position: "实际控制人、董事长",
+      period: "2023至今",
+      background: "世纪睿科创始人",
+      description: "33岁，通过世纪睿科完成对交个朋友的收购"
+    },
+    {
+      name: "黄贺",
+      position: "创始人、总经理",
+      period: "2020至今",
+      background: "罗永浩前同事，交个朋友核心运营",
+      description: "负责公司日常运营"
+    }
+  ],
+  financingHistory: [
+    {
+      round: "天使轮",
+      date: "2020年初",
+      amount: "未披露",
+      investors: ["未披露"],
+      description: "罗永浩与黄贺等人创立"
+    },
+    {
+      round: "战略投资",
+      date: "2021-2022",
+      amount: "未披露",
+      investors: ["机构投资者"],
+      description: "多轮融资"
+    },
+    {
+      round: "借壳上市",
+      date: "2023年5月",
+      amount: "约1亿港元",
+      valuation: "约30亿港元",
+      investors: ["世纪睿科"],
+      leadInvestor: "世纪睿科",
+      description: "世纪睿科收购交个朋友100%股权，完成借壳"
+    }
+  ],
+  equityStructure: [
+    { shareholder: "李钧（一致行动人）", percentage: "约50%", description: "实际控制人" },
+    { shareholder: "罗永浩", percentage: "已退出", description: "逐步退出持股" },
+    { shareholder: "黄贺", percentage: "未披露", description: "创始人之一" },
+    { shareholder: "公众股东", percentage: "约50%", description: "港股流通股" }
+  ],
+  majorEvents: [
+    { date: "2020.04.01", event: "抖音首播", impact: "支付GMV超1亿元，创抖音记录" },
+    { date: "2020.09", event: "宣布还债4亿元", impact: "直播收入主要用于还债" },
+    { date: "2022.06", event: "罗永浩退出管理层", impact: "逐步减少直播场次" },
+    { date: "2023.05", event: "世纪睿科更名", impact: "港股01450更名为交个朋友控股" },
+    { date: "2023.07", event: "正式更名完成", impact: "借壳上市完成" },
+    { date: "2024", event: "全年GMV约120亿元", impact: "成为头部直播电商机构" }
+  ],
+  financialData: [
+    { year: "2020", gmv: "未披露", revenue: "未披露", description: "首年运营" },
+    { year: "2021", gmv: "约50亿元", revenue: "未披露", description: "快速增长" },
+    { year: "2022", gmv: "未披露", revenue: "约1.37亿元(H1)", description: "上半年收入" },
+    { year: "2023", gmv: "约120亿元", revenue: "10.7亿元", profit: "1.8亿元(调整后)", description: "营收同比增长152%" },
+    { year: "2024", gmv: "约120亿元+", revenue: "预计增长", description: "业务稳定" }
+  ],
+  sources: [
+    { title: "证券时报", url: "https://www.stcn.com/article/detail/863325.html", platform: "新闻" },
+    { title: "新浪财经", url: "https://finance.sina.cn/stock/ssgs/2023-07-14/detail-imzasfim8141158.d.html?vt=4", platform: "新闻" },
+    { title: "17173新闻", url: "http://news.17173.com/content/03292024/093007571.shtml", platform: "新闻" },
+    { title: "时代周报", url: "https://i.ifeng.com/c/8PjfIK0cg74", platform: "新闻" },
+    { title: "每经网", url: "https://m.mp.oeeee.com/a/BAAFRD000020230510795788.html", platform: "新闻" }
+  ]
+};
+
+// 细红线科技详细报告
+export const thinRedLineDetail: CompanyDetail = {
+  name: "细红线科技（Thin Red Line）",
+  period: "2022至今",
+  status: "运营中",
+  description: "AR/AI创业公司，罗永浩自称"最后一次创业"。2022年获得约5000万美元天使轮融资，投后估值约2亿美元。2024年放弃AR眼镜转向AI，2025年1月发布J1 Assistant测试版。",
+  foundingDate: "2022年",
+  registeredCapital: "未披露",
+  businessScope: "AR/AI软硬件研发、大模型应用",
+  keyPersonnel: [
+    {
+      name: "罗永浩",
+      position: "创始人、CEO",
+      period: "2022至今",
+      background: "锤子科技创始人，交个朋友联合创始人",
+      description: "全程主导产品和战略"
+    },
+    {
+      name: "朱拥华",
+      position: "董事（美团龙珠代表）",
+      period: "2022至今",
+      background: "美团龙珠创始合伙人",
+      description: "代表投资方美团出任董事"
+    }
+  ],
+  financingHistory: [
+    {
+      round: "天使轮",
+      date: "2022年11月",
+      amount: "约5000万美元（3.57亿元人民币）",
+      valuation: "约2亿美元（14.28亿元人民币）",
+      investors: ["美团龙珠", "蓝驰创投", "联想创投", "经纬创投", "大疆创新", "ATM Capital", "黎万强", "吴泳铭"],
+      leadInvestor: "美团龙珠",
+      description: "九家机构合投，美团龙珠领投"
+    }
+  ],
+  equityStructure: [
+    { shareholder: "罗永浩", percentage: "预计50%+", description: "创始人控股" },
+    { shareholder: "美团龙珠", percentage: "未披露", description: "领投方，占有董事席位" },
+    { shareholder: "其他投资机构", percentage: "未披露", description: "蓝驰、经纬、联想等" }
+  ],
+  majorEvents: [
+    { date: "2022.10", event: "AR项目曝光", impact: "媒体报道获天使轮融资" },
+    { date: "2022.11", event: "正式官宣", impact: "完成5000万美元天使轮融资" },
+    { date: "2023.01", event: "投资人纠纷", impact: "郑刚公开指责罗永浩补偿方案" },
+    { date: "2024年", event: "战略转型", impact: "从AR转向AI智能硬件和大模型" },
+    { date: "2025.01", event: "J1 Assistant发布", impact: "海外测试版上线" },
+    { date: "2025.04", event: "硬件团队裁撤", impact: "保留20名软件工程师" },
+    { date: "2025.12", event: "年度大会", impact: "将发布AI软件产品" }
+  ],
+  financialData: [
+    { year: "2022", revenue: "0", profit: "研发投入", description: "初创期，获天使轮融资" },
+    { year: "2023", revenue: "0", profit: "研发投入", description: "产品研发期" },
+    { year: "2024", revenue: "0", profit: "研发投入", description: "战略转型期" },
+    { year: "2025", revenue: "预计0", profit: "持续投入", description: "产品测试中" }
+  ],
+  sources: [
+    { title: "新浪财经", url: "https://finance.sina.com.cn/chanjing/gsnews/2022-11-25/doc-imqmmthc5885106.shtml", platform: "新闻" },
+    { title: "证券时报", url: "https://www.stcn.com/article/detail/738631.html", platform: "新闻" },
+    { title: "21世纪经济报道", url: "http://www.21jingji.com/article/20221128/herald/1c2833b0a3e420b99810eec333a0a9ae.html", platform: "新闻" },
+    { title: "36氪", url: "https://m.36kr.com/p/1966116394716040", platform: "新闻" },
+    { title: "IT之家", url: "https://www.ithome.com/0/648/011.htm", platform: "新闻" },
+    { title: "第一财经", url: "https://www.yicai.com/news/101643522.html", platform: "新闻" }
+  ]
+};
+
+// 导出所有公司详情
+export const companyDetails: CompanyDetail[] = [
+  hammerTechDetail,
+  jiaogePengyouDetail,
+  thinRedLineDetail
+];

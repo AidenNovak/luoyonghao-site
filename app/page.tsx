@@ -13,6 +13,8 @@ import {
   techConference2025,
   thinRedLine2025,
   images,
+  companyDetails,
+  type CompanyDetail,
 } from "@/lib/data";
 
 export default function Home() {
@@ -26,6 +28,7 @@ export default function Home() {
             <a href="#latest" className="hover:text-blue-600 transition whitespace-nowrap">最新动态</a>
             <a href="#timeline" className="hover:text-blue-600 transition">时间轴</a>
             <a href="#companies" className="hover:text-blue-600 transition">公司</a>
+            <a href="#companyDetail" className="hover:text-blue-600 transition whitespace-nowrap">公司详情</a>
             <a href="#keynotes" className="hover:text-blue-600 transition">发布会</a>
             <a href="#thinredline" className="hover:text-blue-600 transition whitespace-nowrap">细红线</a>
             <a href="#podcast" className="hover:text-blue-600 transition">播客</a>
@@ -156,6 +159,21 @@ export default function Home() {
             <p className="mt-4 text-sm text-zinc-500 italic">
               {techConference2025.significance}
             </p>
+            {(techConference2025 as any).sources && (
+              <div className="mt-4 flex gap-2 flex-wrap">
+                {(techConference2025 as any).sources.map((source: any, i: number) => (
+                  <a
+                    key={i}
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded hover:bg-red-200 dark:hover:bg-red-900/50 transition"
+                  >
+                    📋 {source.title}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* 细红线2025动态概览 */}
@@ -212,6 +230,16 @@ export default function Home() {
                   </span>
                   <h4 className="text-xl font-semibold mb-1">{event.title}</h4>
                   <p className="text-zinc-600 dark:text-zinc-400">{event.description}</p>
+                  {event.source && (
+                    <a
+                      href={event.source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      <span>📋</span> {event.source.title}
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -247,7 +275,22 @@ export default function Home() {
                   </span>
                 </div>
                 <p className="text-sm text-zinc-500 mb-3">{company.period}</p>
-                <p className="text-zinc-700 dark:text-zinc-300">{company.description}</p>
+                <p className="text-zinc-700 dark:text-zinc-300 mb-3">{company.description}</p>
+                {company.sources && company.sources.length > 0 && (
+                  <div className="flex gap-2 flex-wrap">
+                    {company.sources.map((source, i) => (
+                      <a
+                        key={i}
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition"
+                      >
+                        📋 {source.title}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -276,6 +319,240 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Company Details - 公司详细报告 */}
+      <section id="companyDetail" className="py-16 px-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="w-1 h-8 bg-emerald-600 rounded-full"></span>
+            公司深度报告
+          </h3>
+          <p className="text-zinc-500 mb-8 text-sm">融资历史、核心团队、股权结构、财务数据</p>
+
+          {companyDetails.map((company) => (
+            <div key={company.name} className="mb-12 bg-white dark:bg-zinc-900 rounded-2xl shadow-lg overflow-hidden">
+              {/* 公司头部 */}
+              <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h4 className="text-2xl font-bold mb-2">{company.name}</h4>
+                    <p className="text-emerald-100 text-sm mb-3">{company.period} · {company.status}</p>
+                    <p className="text-sm leading-relaxed max-w-3xl">{company.description}</p>
+                  </div>
+                  <div className="text-right text-sm">
+                    <p className="text-emerald-200">成立时间</p>
+                    <p className="font-medium">{company.foundingDate}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6">
+                {/* 基本信息 */}
+                <div className="grid md:grid-cols-3 gap-4 mb-8">
+                  {company.registeredCapital && (
+                    <div className="p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                      <p className="text-xs text-zinc-500 mb-1">注册资本</p>
+                      <p className="font-medium">{company.registeredCapital}</p>
+                    </div>
+                  )}
+                  {company.businessScope && (
+                    <div className="p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                      <p className="text-xs text-zinc-500 mb-1">业务范围</p>
+                      <p className="font-medium text-sm">{company.businessScope}</p>
+                    </div>
+                  )}
+                  <div className="p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                    <p className="text-xs text-zinc-500 mb-1">运营状态</p>
+                    <p className="font-medium">{company.status}</p>
+                  </div>
+                </div>
+
+                {/* 核心团队 */}
+                <div className="mb-8">
+                  <h5 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-emerald-500 rounded"></span>
+                    核心团队
+                  </h5>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {company.keyPersonnel.map((person, i) => (
+                      <div key={i} className="p-4 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:border-emerald-500 dark:hover:border-emerald-500 transition">
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="font-semibold">{person.name}</p>
+                          <span className="text-xs px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">
+                            {person.position}
+                          </span>
+                        </div>
+                        {person.period && <p className="text-xs text-zinc-500 mb-2">{person.period}</p>}
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400">{person.background}</p>
+                        {person.afterPath && (
+                          <p className="text-xs text-zinc-500 mt-2">→ {person.afterPath}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 融资历史 */}
+                <div className="mb-8">
+                  <h5 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-blue-500 rounded"></span>
+                    融资历史
+                  </h5>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                          <th className="text-left py-3 px-4 font-medium">轮次</th>
+                          <th className="text-left py-3 px-4 font-medium">时间</th>
+                          <th className="text-left py-3 px-4 font-medium">金额</th>
+                          <th className="text-left py-3 px-4 font-medium">估值</th>
+                          <th className="text-left py-3 px-4 font-medium">投资方</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {company.financingHistory.map((round, i) => (
+                          <tr key={i} className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+                            <td className="py-3 px-4">
+                              <span className={`px-2 py-1 rounded text-xs font-medium ${
+                                round.round.includes('天使') ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' :
+                                round.round.includes('A') ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' :
+                                round.round.includes('B') ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' :
+                                round.round.includes('C') ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' :
+                                round.round.includes('D') ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300' :
+                                'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300'
+                              }`}>
+                                {round.round}
+                              </span>
+                            </td>
+                            <td className="py-3 px-4 text-zinc-500">{round.date}</td>
+                            <td className="py-3 px-4 font-medium">{round.amount}</td>
+                            <td className="py-3 px-4 text-zinc-500">{round.valuation || '-'}</td>
+                            <td className="py-3 px-4">
+                              <div className="flex flex-wrap gap-1">
+                                {round.investors.map((inv, j) => (
+                                  <span key={j} className="text-xs px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 rounded">
+                                    {inv}
+                                  </span>
+                                ))}
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* 股权结构 */}
+                {company.equityStructure && company.equityStructure.length > 0 && (
+                  <div className="mb-8">
+                    <h5 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                      <span className="w-1 h-5 bg-purple-500 rounded"></span>
+                      股权结构
+                    </h5>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {company.equityStructure.map((eq, i) => (
+                        <div key={i} className="p-4 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                          <div className="flex justify-between items-center mb-2">
+                            <p className="font-medium">{eq.shareholder}</p>
+                            {eq.percentage && (
+                              <span className="text-sm px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">
+                                {eq.percentage}
+                              </span>
+                            )}
+                          </div>
+                          {eq.description && (
+                            <p className="text-xs text-zinc-500">{eq.description}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 重大事件 */}
+                <div className="mb-8">
+                  <h5 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-orange-500 rounded"></span>
+                    重大事件
+                  </h5>
+                  <div className="relative">
+                    <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-zinc-200 dark:bg-zinc-800"></div>
+                    <div className="space-y-4">
+                      {company.majorEvents.map((evt, i) => (
+                        <div key={i} className="relative pl-8">
+                          <div className="absolute left-1.5 top-2 w-3 h-3 bg-orange-500 rounded-full"></div>
+                          <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                            <div className="flex items-center gap-3 mb-1">
+                              <span className="text-xs font-mono text-zinc-500">{evt.date}</span>
+                              <span className="font-medium text-sm">{evt.event}</span>
+                            </div>
+                            {evt.impact && (
+                              <p className="text-xs text-zinc-500 mt-1">影响: {evt.impact}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 财务数据 */}
+                {company.financialData && company.financialData.length > 0 && (
+                  <div className="mb-8">
+                    <h5 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                      <span className="w-1 h-5 bg-green-500 rounded"></span>
+                      财务数据
+                    </h5>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                            <th className="text-left py-3 px-4 font-medium">年份</th>
+                            <th className="text-left py-3 px-4 font-medium">营收/收入</th>
+                            <th className="text-left py-3 px-4 font-medium">利润</th>
+                            <th className="text-left py-3 px-4 font-medium">GMV</th>
+                            <th className="text-left py-3 px-4 font-medium">备注</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {company.financialData.map((data, i) => (
+                            <tr key={i} className="border-b border-zinc-100 dark:border-zinc-900">
+                              <td className="py-3 px-4 font-medium">{data.year}</td>
+                              <td className="py-3 px-4 text-zinc-600 dark:text-zinc-400">{data.revenue || '-'}</td>
+                              <td className="py-3 px-4 text-zinc-600 dark:text-zinc-400">{data.profit || '-'}</td>
+                              <td className="py-3 px-4 text-zinc-600 dark:text-zinc-400">{data.gmv || '-'}</td>
+                              <td className="py-3 px-4 text-zinc-500 text-xs">{data.description}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
+                {/* 信源链接 */}
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <p className="text-xs text-zinc-500 mb-3">数据来源:</p>
+                  <div className="flex gap-2 flex-wrap">
+                    {company.sources.map((source, i) => (
+                      <a
+                        key={i}
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition"
+                      >
+                        📋 {source.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -347,7 +624,22 @@ export default function Home() {
             {podcast.title}
           </h3>
           <p className="text-zinc-500 mb-6 text-sm">深度人物访谈播客，每期时长3-5小时</p>
-          <p className="text-zinc-700 dark:text-zinc-300 mb-8 leading-relaxed">{podcast.description}</p>
+          <p className="text-zinc-700 dark:text-zinc-300 mb-4 leading-relaxed">{podcast.description}</p>
+          {(podcast as any).sources && (
+            <div className="mb-6 flex gap-2 flex-wrap">
+              {(podcast as any).sources.map((source: any, i: number) => (
+                <a
+                  key={i}
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs px-2 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded hover:bg-pink-200 dark:hover:bg-pink-900/50 transition"
+                >
+                  📋 {source.title}
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Platforms */}
           <div className="flex gap-3 mb-8 flex-wrap">
@@ -439,6 +731,23 @@ export default function Home() {
             </div>
           </div>
 
+          {/* 信源链接 */}
+          {(thinRedLine2025 as any).sources && (
+            <div className="mb-6 flex gap-2 flex-wrap">
+              {(thinRedLine2025 as any).sources.map((source: any, i: number) => (
+                <a
+                  key={i}
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-200 dark:hover:bg-cyan-900/50 transition"
+                >
+                  📋 {source.title}
+                </a>
+              ))}
+            </div>
+          )}
+
           {/* 时间线 */}
           <h4 className="font-semibold text-lg mb-4">发展时间线</h4>
           <div className="space-y-3">
@@ -518,6 +827,22 @@ export default function Home() {
               </div>
             </div>
           </div>
+          {/* 信源链接 */}
+          {(debtInfo as any).sourceLinks && (
+            <div className="mt-6 flex gap-2 flex-wrap">
+              {(debtInfo as any).sourceLinks.map((source: any, i: number) => (
+                <a
+                  key={i}
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded hover:bg-red-200 dark:hover:bg-red-900/50 transition"
+                >
+                  📋 {source.title}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
