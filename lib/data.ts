@@ -23,6 +23,26 @@ export interface Product {
   status: string;
 }
 
+export interface Keynote {
+  date: string;
+  title: string;
+  location: string;
+  products: string[];
+  highlights: string;
+  videoUrl?: string;
+}
+
+export interface PodcastEpisode {
+  episode: string;
+  title: string;
+  guest: string;
+  guestTitle: string;
+  releaseDate: string;
+  duration: string;
+  platform: string;
+  description: string;
+}
+
 export const profile = {
   name: "罗永浩",
   englishName: "Luo Yonghao",
@@ -136,3 +156,163 @@ export const books = [
   { title: "《生命不息，折腾不止》", year: "2014", description: "演讲合集，分享人生感悟" },
   { title: "《创业在路上》", year: "2018", description: "创业心得与思考" },
 ];
+
+export const keynotes: Keynote[] = [
+  {
+    date: "2013.03.27",
+    title: "Smartisan OS 发布会",
+    location: "国家会议中心",
+    products: ["Smartisan OS"],
+    highlights: "罗永浩首次亮相，发布基于Android的Smartisan OS系统，展示九宫格、九/十六宫格等创新UI设计",
+  },
+  {
+    date: "2014.05.20",
+    title: "Smartisan T1 发布会",
+    location: "国家会议中心",
+    products: ["Smartisan T1"],
+    highlights: "首款手机产品，号称'东半球最好用的智能手机'，后因广告法改为'全球第二好用的智能手机'。获iF设计金奖",
+  },
+  {
+    date: "2014.07.28",
+    title: "Smartisan T1 增强版发布会",
+    location: "北京",
+    products: ["Smartisan T1 4G增强版"],
+    highlights: "推出支持4G网络的增强版，降价策略引发争议",
+  },
+  {
+    date: "2014.08.27",
+    title: "罗永浩对质王自如",
+    location: "优酷直播",
+    products: [],
+    highlights: "与Zealer创始人王自如进行直播辩论，全程3小时25分钟，引发网络热议",
+  },
+  {
+    date: "2015.08.25",
+    title: "坚果手机发布会",
+    location: "上海梅赛德斯-奔驰文化中心",
+    products: ["坚果U1"],
+    highlights: "推出千元机系列，文艺青年定位，'漂亮得不像实力派'",
+  },
+  {
+    date: "2015.12.29",
+    title: "Smartisan T2 发布会",
+    location: "北京",
+    products: ["Smartisan T2"],
+    highlights: "全金属中框设计，取消电源键，指纹识别与 Home 键整合",
+  },
+  {
+    date: "2016.10.18",
+    title: "Smartisan M1/M1L 发布会",
+    location: "上海梅赛德斯-奔驰文化中心",
+    products: ["Smartisan M1", "Smartisan M1L"],
+    highlights: "引入One Step、Big Bang等功能，'语音输入'速度超越人类极限",
+  },
+  {
+    date: "2017.05.09",
+    title: "坚果Pro 发布会",
+    location: "北京工业大学奥林匹克体育馆",
+    products: ["坚果Pro"],
+    highlights: "''颜值''回归，细红线 Home 键设计，''这可能是东半球最好用的手机''",
+  },
+  {
+    date: "2017.11.07",
+    title: "坚果Pro 2 发布会",
+    location: "成都大魔方演艺中心",
+    products: ["坚果Pro 2"],
+    highlights: "隐藏式指纹识别，全面屏设计，''谦虚的手机''",
+  },
+  {
+    date: "2018.04.09",
+    title: "坚果3 发布会",
+    location: "北京工业大学奥林匹克体育馆",
+    products: ["坚果3"],
+    highlights: "千元全面屏手机，''只有百分之几的疯子才会购买''",
+  },
+  {
+    date: "2018.05.15",
+    title: "坚果R1 & TNT工作站发布会",
+    location: "国家体育场（鸟巢）",
+    products: ["坚果R1", "坚果TNT工作站"],
+    highlights: "鸟巢发布会，TNT工作站定义为''重新定义下一个十年的个人电脑''，售价9999元。罗永浩称''这是坚果历史上规模最大的一场发布会''",
+  },
+  {
+    date: "2018.08.20",
+    title: "坚果Pro 2S 发布会",
+    location: "北京宝格丽酒店",
+    products: ["坚果Pro 2S"],
+    highlights: "''次世代''手机，搭载骁龙710，加入''子弹短信''功能",
+  },
+  {
+    date: "2018.11.06",
+    title: "坚果R2 & TNT go 发布会",
+    location: "成都",
+    products: ["坚果TNT go"],
+    highlights: "发布便携式TNT显示器，可连接坚果手机使用",
+  },
+  {
+    date: "2019.10.31",
+    title: "坚果Pro 3 发布会",
+    location: "北京工业大学奥林匹克体育馆",
+    products: ["坚果Pro 3"],
+    highlights: "字节跳动收购后首款产品，''我们回来了''",
+  },
+  {
+    date: "2020.10.20",
+    title: "坚果R2 发布会",
+    location: "北京",
+    products: ["坚果R2", "坚果TNT go", "Smartisan TNT OS 2.0"],
+    highlights: "5G旗舰，最后一代坚果手机，售价4499元起",
+  },
+];
+
+export const podcast = {
+  title: "罗永浩的十字路口",
+  description: "深度人物访谈播客，每期时长3-5小时，以''人生复盘会''形式呈现。从嘉宾童年经历切入，回溯关键人生选择与转折，探讨科技、人文、世界、时代以及人生所有的十字路口。",
+  platforms: [
+    { name: "B站", url: "https://space.bilibili.com/352730124", icon: "B站" },
+    { name: "小宇宙", url: "https://www.xiaoyuzhoufm.com/podcast/68981df29e7bcd326eb91d88", icon: "小宇宙" },
+    { name: "喜马拉雅", url: "https://www.ximalaya.com/", icon: "喜马拉雅" },
+  ],
+  episodes: [
+    {
+      episode: "Vol.01",
+      title: "罗永浩的十字路口：李想",
+      guest: "李想",
+      guestTitle: "理想汽车创始人",
+      releaseDate: "2025.08.19",
+      duration: "约4小时",
+      platform: "B站",
+      description: "首期节目，与理想汽车创始人李想深度对话，聊童年、创业历程、人生选择，''一个啥都敢问，一个啥都敢说''",
+    },
+    {
+      episode: "Vol.02",
+      title: "罗永浩的十字路口：何小鹏",
+      guest: "何小鹏",
+      guestTitle: "小鹏汽车董事长",
+      releaseDate: "2025.08.26",
+      duration: "约4小时",
+      platform: "B站",
+      description: "与小鹏汽车董事长何小鹏对谈，探讨新能源汽车创业、人生抉择、时代机遇",
+    },
+    {
+      episode: "Vol.03",
+      title: "罗永浩的十字路口：影视飓风",
+      guest: "影视飓风",
+      guestTitle: "影视博主",
+      releaseDate: "2025.09",
+      duration: "约3小时",
+      platform: "B站",
+      description: "与知名影视博主对话，探讨内容创作、媒体行业变迁",
+    },
+    {
+      episode: "Vol.04",
+      title: "罗永浩的十字路口",
+      guest: "待公布",
+      guestTitle: "",
+      releaseDate: "更新中",
+      duration: "",
+      platform: "",
+      description: "持续更新中，将邀请科技、人文、商业等领域代表性人物",
+    },
+  ],
+};

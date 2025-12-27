@@ -6,6 +6,8 @@ import {
   quotes,
   debtInfo,
   books,
+  keynotes,
+  podcast,
 } from "@/lib/data";
 
 export default function Home() {
@@ -15,10 +17,12 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-xl font-bold">罗永浩信息聚合站</h1>
-          <nav className="flex gap-6 text-sm">
+          <nav className="flex gap-4 md:gap-6 text-xs md:text-sm">
             <a href="#timeline" className="hover:text-blue-600 transition">时间轴</a>
             <a href="#companies" className="hover:text-blue-600 transition">公司</a>
             <a href="#products" className="hover:text-blue-600 transition">产品</a>
+            <a href="#keynotes" className="hover:text-blue-600 transition">发布会</a>
+            <a href="#podcast" className="hover:text-blue-600 transition">播客</a>
             <a href="#quotes" className="hover:text-blue-600 transition">语录</a>
             <a href="#debt" className="hover:text-blue-600 transition">还债</a>
           </nav>
@@ -140,6 +144,109 @@ export default function Home() {
                 </div>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-2">{product.description}</p>
                 <span className="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded">{product.status}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Keynotes / 发布会 */}
+      <section id="keynotes" className="py-16 px-4 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="max-w-5xl mx-auto">
+          <h3 className="text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="w-1 h-8 bg-orange-500 rounded-full"></span>
+            发布会记录
+          </h3>
+          <p className="text-zinc-500 mb-8 text-sm">罗永浩的发布会被称为"单口相声"，以下是历次重要发布会记录</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                  <th className="text-left py-3 px-4 font-medium">日期</th>
+                  <th className="text-left py-3 px-4 font-medium">发布会</th>
+                  <th className="text-left py-3 px-4 font-medium hidden md:table-cell">地点</th>
+                  <th className="text-left py-3 px-4 font-medium">亮点</th>
+                </tr>
+              </thead>
+              <tbody>
+                {keynotes.map((keynote, index) => (
+                  <tr key={index} className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition">
+                    <td className="py-3 px-4 text-zinc-500 whitespace-nowrap">{keynote.date}</td>
+                    <td className="py-3 px-4">
+                      <div className="font-medium">{keynote.title}</div>
+                      <div className="text-xs text-zinc-500 md:hidden">{keynote.location}</div>
+                      {keynote.products.length > 0 && (
+                        <div className="flex gap-1 mt-1 flex-wrap">
+                          {keynote.products.map((p, i) => (
+                            <span key={i} className="text-xs px-2 py-0.5 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">
+                              {p}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 text-zinc-500 hidden md:table-cell">{keynote.location}</td>
+                    <td className="py-3 px-4 text-zinc-600 dark:text-zinc-400 text-sm max-w-md">{keynote.highlights}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Podcast */}
+      <section id="podcast" className="py-16 px-4 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-bold mb-2 flex items-center gap-3">
+            <span className="w-1 h-8 bg-pink-500 rounded-full"></span>
+            {podcast.title}
+          </h3>
+          <p className="text-zinc-500 mb-6 text-sm">深度人物访谈播客，每期时长3-5小时</p>
+          <p className="text-zinc-700 dark:text-zinc-300 mb-8 leading-relaxed">{podcast.description}</p>
+
+          {/* Platforms */}
+          <div className="flex gap-3 mb-8 flex-wrap">
+            {podcast.platforms.map((platform, index) => (
+              <a
+                key={index}
+                href={platform.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-lg hover:bg-pink-200 dark:hover:bg-pink-900/50 transition text-sm font-medium"
+              >
+                {platform.name} →
+              </a>
+            ))}
+          </div>
+
+          {/* Episodes */}
+          <h4 className="font-semibold text-lg mb-4">节目列表</h4>
+          <div className="space-y-4">
+            {podcast.episodes.map((episode, index) => (
+              <div
+                key={index}
+                className="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-pink-400 dark:hover:border-pink-400 transition"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <span className="text-xs px-2 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded mr-2">
+                      {episode.episode}
+                    </span>
+                    <span className="text-xs text-zinc-500">{episode.releaseDate}</span>
+                    {episode.duration && (
+                      <span className="text-xs text-zinc-400 ml-2">· {episode.duration}</span>
+                    )}
+                  </div>
+                  {episode.platform && (
+                    <span className="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded">{episode.platform}</span>
+                  )}
+                </div>
+                <h5 className="font-semibold text-lg mb-1">{episode.title}</h5>
+                {episode.guestTitle && (
+                  <p className="text-sm text-pink-600 dark:text-pink-400 mb-2">嘉宾：{episode.guest} · {episode.guestTitle}</p>
+                )}
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">{episode.description}</p>
               </div>
             ))}
           </div>
