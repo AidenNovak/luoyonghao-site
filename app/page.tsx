@@ -1,3 +1,5 @@
+"use client";
+
 import {
   profile,
   timeline,
@@ -41,7 +43,11 @@ export default function Home() {
               <img
                 src={profile.avatar}
                 alt={profile.name}
-                className="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover shadow-lg"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = profile.avatarFallback;
+                }}
+                className="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover shadow-lg bg-zinc-200 dark:bg-zinc-800"
               />
             </div>
             {/* 信息区域 */}
@@ -87,7 +93,11 @@ export default function Home() {
                 <img
                   src={img.url}
                   alt={img.alt}
-                  className="w-full h-40 object-cover rounded-lg shadow-md group-hover:shadow-lg transition"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Crect fill='%23e5e7eb' width='200' height='120'/%3E%3Ctext x='100' y='65' text-anchor='middle' font-size='24' fill='%239ca3af'%3E图片加载中...%3C/text%3E%3C/svg%3E";
+                  }}
+                  className="w-full h-40 object-cover rounded-lg shadow-md group-hover:shadow-lg transition bg-zinc-100 dark:bg-zinc-800"
                 />
                 {img.caption && (
                   <p className="text-xs text-zinc-500 mt-2 text-center">{img.caption}</p>

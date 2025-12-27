@@ -48,19 +48,20 @@ export interface Image {
   url: string;
   alt: string;
   caption?: string;
+  fallback?: string;
 }
 
 // 罗永浩相关图片资源（使用公开可用的外部图片）
 export const images: Image[] = [
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Luo_Yonghao_in_2014.jpg/440px-Luo_Yonghao_in_2014.jpg",
+    url: "https://upload.wikimedia.org/wikipedia/commons/5/50/Luo_Yonghao_in_2014.jpg",
     alt: "罗永浩2014年",
-    caption: "2014年Smartisan T1发布会时期"
+    caption: "2014年Smartisan T1发布会时期",
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Luo_Yonghao_in_2023.jpg/440px-Luo_Yonghao_in_2023.jpg",
+    url: "https://upload.wikimedia.org/wikipedia/commons/3/30/Luo_Yonghao_in_2023.jpg",
     alt: "罗永浩2023年",
-    caption: "2023年直播时期"
+    caption: "2023年直播时期",
   },
 ];
 
@@ -73,7 +74,9 @@ export const profile = {
   ethnicity: "朝鲜族",
   titles: ["企业家", "演说家", "作家", "直播主", "前英语教师"],
   bio: "高中辍学，曾从事多种职业：摆地摊、开羊肉串店、倒卖药材、做期货、销售电脑配件、从事文学创作。2001年至2006年在北京新东方学校任教，以幽默诙谐的教学风格闻名。后创办牛博网、老罗英语培训学校、锤子科技等。",
-  avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Luo_Yonghao_in_2014.jpg/220px-Luo_Yonghao_in_2014.jpg",
+  // 使用更稳定的图片URL
+  avatar: "https://upload.wikimedia.org/wikipedia/commons/5/50/Luo_Yonghao_in_2014.jpg",
+  avatarFallback: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23e5e7eb' width='100' height='100'/%3E%3Ctext x='50' y='55' text-anchor='middle' font-size='40' fill='%239ca3af'%3E老罗%3C/text%3E%3C/svg%3E",
 };
 
 export const timeline: TimelineEvent[] = [
