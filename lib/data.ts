@@ -66,8 +66,11 @@ export const timeline: TimelineEvent[] = [
   { year: "2018", title: "出售给字节跳动", description: "将坚果手机团队和专利以1.8亿元出售给字节跳动" },
   { year: "2020", title: "进军直播带货", description: "4月1日抖音首播，支付GMV超1亿元" },
   { year: "2022", title: "创立细红线科技", description: "11月宣布AR创业项目，获5000万美元天使轮" },
-  { year: "2024", title: "转型AI", description: "细红线从AR转向AI，发布J1 Assistant" },
-  { year: "2025", title: "AI硬件筹备", description: "筹备发布JARVIS ONE AI硬件产品" },
+  { year: "2024", title: "从AR转向AI", description: "细红线放弃AR眼镜，转向AI智能硬件和大模型研发" },
+  { year: "2025.01", title: "J1 Assistant发布", description: "在海外发布AI助理软件J1 Assistant测试版（仅Android）" },
+  { year: "2025.04", title: "硬件团队裁撤", description: "完成AI智能硬件研发后裁撤全部硬件团队，保留约20名软件工程师" },
+  { year: "2025.04", title: "重启招聘", description: "细红线重启招聘，招募AI产品经理、大模型算法工程师等" },
+  { year: "2025.12", title: "科技春晚回归", description: "宣布12月30日举办年度科技创新分享大会，将发布细红线AI软件" },
 ];
 
 export const companies: Company[] = [
@@ -98,7 +101,7 @@ export const companies: Company[] = [
   {
     name: "细红线科技（Thin Red Line）",
     period: "2022至今",
-    description: "AR/AI创业公司，自称'最后一次创业'。2022年获得约5000万美元天使轮融资，投后估值约2亿美元。2024年从AR转向AI，发布J1 Assistant软件产品",
+    description: "AR/AI创业公司，自称'最后一次创业'。2022年获得约5000万美元天使轮融资，投后估值约2亿美元。2024年放弃AR眼镜研发转向AI，2025年1月发布J1 Assistant测试版，4月裁撤硬件团队保留20名软件工程师",
     status: "运营中"
   },
 ];
@@ -315,4 +318,83 @@ export const podcast = {
       description: "持续更新中，将邀请科技、人文、商业等领域代表性人物",
     },
   ],
+};
+
+// 2025年度科技创新分享大会（12月30日）
+export const techConference2025 = {
+  title: "罗永浩的十字路口·2025年度科技创新分享大会",
+  subtitle: "时隔七年'科技春晚'回归",
+  date: "2025年12月30日 19:00-22:00",
+  location: "上海西岸国际会展中心",
+  ticketInfo: {
+    prices: ["300元", "400元", "500元", "600元", "800元", "1000元"],
+    totalTickets: "约3350张",
+    saleDate: "12月22日12:00",
+    salePlatform: "大麦App",
+    status: "开售2小时售罄",
+    note: "实名制购票，不支持退票和选座，门票收入全部用于公益"
+  },
+  description: "这不是带货直播，而是真正的科技创新分享大会。将展示约十几个中国创新型科技产品，软件和硬件各占一半，聚焦那些还未完全走入大众视野的创新项目。",
+  highlights: [
+    "正式发布细红线科技研发的AI软件",
+    "介绍约10-15个中国科技创新产品",
+    "软件和硬件产品各占一半",
+    "线下发布+线上直播形式",
+    "门票收入全部用于公益"
+  ],
+  significance: "被视为罗永浩时隔七年后的''科技春晚''回归，上一次如此规模的发布会是2018年的鸟巢TNT发布会"
+};
+
+// 细红线科技2025年动态
+export const thinRedLine2025 = {
+  timeline: [
+    {
+      date: "2024年",
+      event: "战略转型",
+      description: "放弃AR智能眼镜类产品研发，转向AI智能硬件和AI大模型研发"
+    },
+    {
+      date: "2025年1月",
+      event: "J1 Assistant发布",
+      description: "在海外低调上线J1 Assistant测试版，仅支持Android平台。聚合To Do、Notes、AI搜索、短信发送等功能，采用''涟漪触控''交互设计"
+    },
+    {
+      date: "2025年1月",
+      event: "硬件筹备完成",
+      description: "完成AI智能硬件研发，为后续JARVIS ONE硬件做准备"
+    },
+    {
+      date: "2025年4月",
+      event: "硬件团队裁撤",
+      description: "完成AI智能硬件研发后，裁撤全部硬件团队，仅保留约20名软件工程师负责AI软件产品研发和打磨"
+    },
+    {
+      date: "2025年4月",
+      event: "重启招聘",
+      description: "发布春季招聘信息，招募AI产品经理、大模型算法工程师等人才，重启AI赛道布局"
+    },
+    {
+      date: "2025年12月",
+      event: "年度大会",
+      description: "宣布12月30日举办年度科技创新分享大会，将正式发布细红线AI软件"
+    }
+  ],
+  j1Assistant: {
+    name: "J1 Assistant",
+    type: "AI助理软件",
+    platform: "Android（海外测试版）",
+    status: "测试中",
+    features: [
+      "To Do - 智能待办事项管理",
+      "Notes - 锤子便签加强版",
+      "Jarvis - 核心AI搜索功能",
+      "Messages - 短信发送功能",
+      "Search - 传统搜索+AI搜索"
+    ],
+    highlights: "语音输入为核心交互方式，内置Agent能力，能理解复杂语音指令并执行操作"
+  },
+  upcoming: {
+    hardware: "JARVIS ONE",
+    description: "AI原生硬件设备，官网已预告但尚未发布"
+  }
 };
