@@ -41,7 +41,28 @@ export interface PodcastEpisode {
   duration: string;
   platform: string;
   description: string;
+  videoUrl?: string;
 }
+
+export interface Image {
+  url: string;
+  alt: string;
+  caption?: string;
+}
+
+// 罗永浩相关图片资源（使用公开可用的外部图片）
+export const images: Image[] = [
+  {
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Luo_Yonghao_in_2014.jpg/440px-Luo_Yonghao_in_2014.jpg",
+    alt: "罗永浩2014年",
+    caption: "2014年Smartisan T1发布会时期"
+  },
+  {
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Luo_Yonghao_in_2023.jpg/440px-Luo_Yonghao_in_2023.jpg",
+    alt: "罗永浩2023年",
+    caption: "2023年直播时期"
+  },
+];
 
 export const profile = {
   name: "罗永浩",
@@ -52,6 +73,7 @@ export const profile = {
   ethnicity: "朝鲜族",
   titles: ["企业家", "演说家", "作家", "直播主", "前英语教师"],
   bio: "高中辍学，曾从事多种职业：摆地摊、开羊肉串店、倒卖药材、做期货、销售电脑配件、从事文学创作。2001年至2006年在北京新东方学校任教，以幽默诙谐的教学风格闻名。后创办牛博网、老罗英语培训学校、锤子科技等。",
+  avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Luo_Yonghao_in_2014.jpg/220px-Luo_Yonghao_in_2014.jpg",
 };
 
 export const timeline: TimelineEvent[] = [
@@ -188,6 +210,7 @@ export const keynotes: Keynote[] = [
     location: "优酷直播",
     products: [],
     highlights: "与Zealer创始人王自如进行直播辩论，全程3小时25分钟，引发网络热议",
+    videoUrl: "https://v.youku.com/v_show/id_XNzYzMzc4OTQ0.html"
   },
   {
     date: "2015.08.25",
@@ -286,6 +309,7 @@ export const podcast = {
       duration: "约4小时",
       platform: "B站",
       description: "首期节目，与理想汽车创始人李想深度对话，聊童年、创业历程、人生选择，''一个啥都敢问，一个啥都敢说''",
+      videoUrl: "https://www.bilibili.com/video/BV1KQedYZEDg/"
     },
     {
       episode: "Vol.02",
@@ -296,6 +320,7 @@ export const podcast = {
       duration: "约4小时",
       platform: "B站",
       description: "与小鹏汽车董事长何小鹏对谈，探讨新能源汽车创业、人生抉择、时代机遇",
+      videoUrl: "https://www.bilibili.com/video/BV1jTedzREds/"
     },
     {
       episode: "Vol.03",
@@ -306,6 +331,7 @@ export const podcast = {
       duration: "约3小时",
       platform: "B站",
       description: "与知名影视博主对话，探讨内容创作、媒体行业变迁",
+      videoUrl: "https://space.bilibili.com/352730124"
     },
     {
       episode: "Vol.04",

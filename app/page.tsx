@@ -10,6 +10,7 @@ import {
   podcast,
   techConference2025,
   thinRedLine2025,
+  images,
 } from "@/lib/data";
 
 export default function Home() {
@@ -33,33 +34,67 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="py-16 px-4 border-b border-zinc-200 dark:border-zinc-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold mb-4">{profile.name}</h2>
-          <p className="text-2xl text-zinc-600 dark:text-zinc-400 mb-6">{profile.englishName}</p>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-            {profile.titles.join(" · ")}
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left bg-zinc-50 dark:bg-zinc-900 p-6 rounded-xl">
-            <div>
-              <p className="text-sm text-zinc-500">出生日期</p>
-              <p className="font-medium">{profile.birthDate}</p>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            {/* 照片区域 */}
+            <div className="flex-shrink-0">
+              <img
+                src={profile.avatar}
+                alt={profile.name}
+                className="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover shadow-lg"
+              />
             </div>
-            <div>
-              <p className="text-sm text-zinc-500">出生地</p>
-              <p className="font-medium">{profile.birthPlace}</p>
-            </div>
-            <div>
-              <p className="text-sm text-zinc-500">民族</p>
-              <p className="font-medium">{profile.ethnicity}</p>
-            </div>
-            <div>
-              <p className="text-sm text-zinc-500">外号</p>
-              <p className="font-medium">{profile.nickname}</p>
+            {/* 信息区域 */}
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">{profile.name}</h2>
+              <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 mb-4">{profile.englishName}</p>
+              <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 mb-6">
+                {profile.titles.join(" · ")}
+              </p>
+              <div className="grid grid-cols-2 gap-3 text-left bg-zinc-50 dark:bg-zinc-900 p-4 rounded-xl mb-6">
+                <div>
+                  <p className="text-xs text-zinc-500">出生日期</p>
+                  <p className="text-sm font-medium">{profile.birthDate}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500">出生地</p>
+                  <p className="text-sm font-medium">{profile.birthPlace}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500">民族</p>
+                  <p className="text-sm font-medium">{profile.ethnicity}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500">外号</p>
+                  <p className="text-sm font-medium">{profile.nickname}</p>
+                </div>
+              </div>
+              <p className="text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+                {profile.bio}
+              </p>
             </div>
           </div>
-          <p className="mt-8 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
-            {profile.bio}
-          </p>
+          {/* 更多照片 */}
+          <div className="mt-8 grid grid-cols-2 gap-4">
+            {images.map((img, index) => (
+              <a
+                key={index}
+                href={img.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <img
+                  src={img.url}
+                  alt={img.alt}
+                  className="w-full h-40 object-cover rounded-lg shadow-md group-hover:shadow-lg transition"
+                />
+                {img.caption && (
+                  <p className="text-xs text-zinc-500 mt-2 text-center">{img.caption}</p>
+                )}
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -250,6 +285,7 @@ export default function Home() {
                   <th className="text-left py-3 px-4 font-medium">发布会</th>
                   <th className="text-left py-3 px-4 font-medium hidden md:table-cell">地点</th>
                   <th className="text-left py-3 px-4 font-medium">亮点</th>
+                  <th className="text-left py-3 px-4 font-medium w-20">视频</th>
                 </tr>
               </thead>
               <tbody>
@@ -271,6 +307,20 @@ export default function Home() {
                     </td>
                     <td className="py-3 px-4 text-zinc-500 hidden md:table-cell">{keynote.location}</td>
                     <td className="py-3 px-4 text-zinc-600 dark:text-zinc-400 text-sm max-w-md">{keynote.highlights}</td>
+                    <td className="py-3 px-4">
+                      {keynote.videoUrl ? (
+                        <a
+                          href={keynote.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-orange-500 hover:bg-orange-600 text-white rounded text-xs font-medium transition"
+                        >
+                          ▶
+                        </a>
+                      ) : (
+                        <span className="text-zinc-400 text-xs">-</span>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -313,7 +363,7 @@ export default function Home() {
                 className="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-pink-400 dark:hover:border-pink-400 transition"
               >
                 <div className="flex items-start justify-between mb-2">
-                  <div>
+                  <div className="flex-1">
                     <span className="text-xs px-2 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded mr-2">
                       {episode.episode}
                     </span>
@@ -322,11 +372,23 @@ export default function Home() {
                       <span className="text-xs text-zinc-400 ml-2">· {episode.duration}</span>
                     )}
                   </div>
+                  {episode.videoUrl && (
+                    <a
+                      href={episode.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1 bg-pink-500 hover:bg-pink-600 text-white rounded-lg text-xs font-medium transition flex items-center gap-1"
+                    >
+                      ▶ 观看
+                    </a>
+                  )}
+                </div>
+                <div className="flex items-center gap-2 mt-1">
                   {episode.platform && (
                     <span className="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded">{episode.platform}</span>
                   )}
                 </div>
-                <h5 className="font-semibold text-lg mb-1">{episode.title}</h5>
+                <h5 className="font-semibold text-lg mb-1 mt-3">{episode.title}</h5>
                 {episode.guestTitle && (
                   <p className="text-sm text-pink-600 dark:text-pink-400 mb-2">嘉宾：{episode.guest} · {episode.guestTitle}</p>
                 )}
